@@ -8,5 +8,5 @@ from rest_framework.serializers import (
 
 class FeedDuckInfoSerializer(ModelSerializer):
     class Meta:
-        model = Contact
+        model = FeedDuckInfo
         fields = '__all__'
