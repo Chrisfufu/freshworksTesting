@@ -4,4 +4,9 @@ from rest_framework import serializers
 from rest_framework.serializers import (
     ModelSerializer,
 )
-from django.core.validators import validate_email
+
+
+class FeedDuckInfoSerializer(ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = '__all__'
