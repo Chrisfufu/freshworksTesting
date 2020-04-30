@@ -9,3 +9,19 @@ from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
 )
+
+class FeedDuckInfoCreateAPIView(CreateAPIView):
+    serializer_class = FeedDuckInfoSerializer
+    queryset = FeedDuckInfo.objects.all()
+
+class FeedDuckInfoListAPIView(ListAPIView):
+    serializer_class = FeedDuckInfoSerializer
+    queryset = FeedDuckInfo.objects.all()
+
+class FeedDuckInfoUpdateAPIView(RetrieveUpdateAPIView):
+    serializer_class = FeedDuckInfoSerializer
+    queryset = FeedDuckInfo.objects.all()
+
+class FeedDuckInfoDeteleAPIView(RetrieveDestroyAPIView):
+    serializer_class = FeedDuckInfoSerializer
+    queryset = FeedDuckInfo.objects.all()
