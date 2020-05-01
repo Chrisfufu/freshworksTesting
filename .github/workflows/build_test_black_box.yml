@@ -10,7 +10,7 @@ jobs:
 
       - name: Docker-Compose up
         working-directory: .
-        run: bash -c 'docker-compose up -d --build && sleep 30'
+        run: docker-compose up -d --build
 
       - uses: actions/setup-python@v1
         with:
