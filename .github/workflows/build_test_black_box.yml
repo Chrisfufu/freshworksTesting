@@ -8,18 +8,18 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-       - name: Docker-Compose up
-          working-directory: .
-          run: docker-compose up -d --build
+      - name: Docker-Compose up
+        working-directory: .
+        run: docker-compose up -d --build
 
-        - uses: actions/setup-python@v1
-          with:
-            python-version: '3.6'
-        - run: pip install pytest requests
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.6'
+      - run: pip install pytest requests
 
-        - name: GitHub Action for pytest
-          working-directory: .
-          run: pytest
+      - name: GitHub Action for pytest
+        working-directory: .
+        run: pytest
 
         - name: Docker-Compose down
           working-directory: .
