@@ -6,6 +6,8 @@ from django.core.validators import validate_email
 # Create your models here.
 # import datetime
 
+# FeedDuckInfo Model
+# ManyToManyField through DuckFood.
 class FeedDuckInfo(models.Model):
     infoId = models.AutoField(primary_key=True)
     time = models.DateTimeField()
@@ -17,6 +19,8 @@ class FeedDuckInfo(models.Model):
         verbose_name = "FeedDuckInfo"
         db_table = "FeedDuckInfo"
 
+# intermidia model, connect to FeedDuckInfo and Food model
+# they are many to many relationship
 class DuckFood(models.Model):
     duckFoodId = models.AutoField(primary_key=True)
     infoId = models.ForeignKey("FeedDuckInfo",db_column = 'infoId', on_delete=models.CASCADE)
@@ -25,6 +29,7 @@ class DuckFood(models.Model):
         verbose_name = "Duck Food"
         db_table = "DuckFood"
 
+# Food model, it contains food information. 
 class Food(models.Model):
     foodId = models.AutoField(primary_key=True)
     food = models.TextField()
