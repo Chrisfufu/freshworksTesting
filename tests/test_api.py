@@ -12,5 +12,5 @@ def test_case1():
         print('\n\n\n',r,'here\n\n\n')
         assert(r.status_code == 200)
     except ConnectionError as e:    # This is the correct syntax
-        print e
+        print (e)
         r = "No response"
