@@ -14,3 +14,4 @@ node_modules
 staticfiles
 package-lock.json
 migrations
+.pytest_cache
