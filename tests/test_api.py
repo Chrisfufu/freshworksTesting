@@ -12,6 +12,7 @@ def test_case1():
 
 
 def test_case2():
-    r = requests.get('http://0.0.0.0:8000/api/info/all')
+    r = requests.get('http://0.0.0.0:8000/api/info/all',
+            headers={"Accept": "application/json"})
     assert(r.status_code == 500)
     print(r)
