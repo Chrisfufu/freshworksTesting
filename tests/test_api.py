@@ -7,4 +7,5 @@ import time
 def test_case1():
     # create your test case 1
     r = requests.get('http://localhost:8000/api/info/all/')
+    print('\n\n\n',r,'here\n\n\n')
     assert(r.status_code == 200)
