@@ -13,7 +13,7 @@ jobs:
 
       - uses: actions/setup-python@v1
         with:
-          python-version: '3.7'
+          python-version: '3.6'
       - run: pip install pytest requests
 
       - name: MySQL Migration
@@ -22,8 +22,8 @@ jobs:
 
       - name: GitHub Action for pytest
         working-directory: ./tests
-        run: bash -c 'sleep 30 && pytest'
+        run: bash -c 'pytest'
 
       - name: Docker-Compose down
-        working-directory: ./smart-home
+        working-directory: .
         run: docker-compose down
