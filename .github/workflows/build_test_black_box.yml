@@ -10,7 +10,7 @@ jobs:
 
       - name: Docker-Compose up
         working-directory: .
-        run: docker-compose up --build
+        run: docker-compose up -d --build
 
       - uses: actions/setup-python@v1
         with:
@@ -22,7 +22,7 @@ jobs:
 
       - name: GitHub Action for pytest
         working-directory: ./tests
-        run: bash -c 'sleep 30 && pytest'
+        run: bash -c 'sleep 30 && pytest -s'
 
       - name: Docker-Compose down
         working-directory: .

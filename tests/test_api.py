@@ -6,6 +6,6 @@ import time
 
 def test_case1():
     # create your test case 1
-    r = requests.get('http://localhost:8000/api/info/all/')
+    r = requests.get('http://0.0.0.0:8000')
     print(r)
-    assert(r.status_code == 200)
+    assert(r.status_code == 404)
