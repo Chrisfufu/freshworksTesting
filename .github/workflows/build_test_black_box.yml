@@ -13,7 +13,7 @@ jobs:
 
       - name: Docker-Compose up
         working-directory: .
-        run: docker-compose up --build
+        run: docker-compose up -d --build
 
       - uses: actions/setup-python@v1
         with:
