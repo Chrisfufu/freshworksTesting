@@ -19,10 +19,13 @@ jobs:
         with:
           python-version: '3.6'
       - run: pip install pytest requests
+        
+      - name: Docker PS 
+        run: docker ps
 
       - name: GitHub Action for pytest
         working-directory: ./tests
-        run: bash -c 'sleep 300 && pytest'
+        run: bash -c 'sleep 20 && pytest'
 
       - name: Docker-Compose down
         working-directory: .
