@@ -5,8 +5,11 @@ from .views import *
 from django.conf import settings
 
 urlpatterns = [
-    url(r'^create/$', FeedDuckInfoCreateAPIView.as_view(), name='create'),
-    url(r'^all/$', FeedDuckInfoListAPIView.as_view(), name='view'),
-    url(r'^update/(?P<pk>[0-9]+)/$', FeedDuckInfoUpdateAPIView.as_view(), name='update'),
-    url(r'^info/(?P<pk>[0-9]+)/delete/$', FeedDuckInfoDeteleAPIView.as_view(), name='delete'),
+    url(r'^info/create/$', FeedDuckInfoCreateAPIView.as_view(), name='info-create'),
+    url(r'^info/all/$', FeedDuckInfoListAPIView.as_view(), name='info-view'),
+    url(r'^info/(?P<pk>[0-9]+)/delete/$', FeedDuckInfoDeteleAPIView.as_view(), name='info-delete'),
+
+    url(r'^foods/create/$', FoodCreateAPIView.as_view(), name='food-create'),
+    url(r'^foods/all/$', FoodListAPIView.as_view(), name='food-view'),
+    url(r'^foods/(?P<pk>[0-9]+)/delete/$', FoodDeteleAPIView.as_view(), name='food-delete'),
 ]
