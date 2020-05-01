@@ -1,0 +1,29 @@
+name: Black Box Testing
+
+on: [push]
+
+jobs:
+  pytest-integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Docker-Compose up
+        working-directory: .
+        run: bash -c 'docker-compose up -d --build && sleep 30'
+
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.6'
+      - run: pip install pytest requests
+
+      - name: Docker PS
+        run: docker ps
+
+      - name: GitHub Action for pytest
+        working-directory: ./tests
+        run: bash -c 'sleep 30 && pytest -s'
+
+      - name: Docker-Compose down
+        working-directory: .
+        run: docker-compose down
