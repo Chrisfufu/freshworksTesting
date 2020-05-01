@@ -8,12 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Stop MySQL
-        run: sudo service mysql stop
-
       - name: Docker-Compose up
         working-directory: .
-        run: docker-compose up -d --build
+        run: docker-compose up --build
 
       - uses: actions/setup-python@v1
         with:
@@ -22,7 +19,7 @@ jobs:
 
       - name: GitHub Action for pytest
         working-directory: ./tests
-        run: bash -c 'sleep 50 && pytest'
+        run: bash -c 'sleep 55 && pytest'
 
       - name: Docker-Compose down
         working-directory: .
