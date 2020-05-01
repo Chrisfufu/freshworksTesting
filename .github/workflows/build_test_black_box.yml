@@ -16,13 +16,13 @@ jobs:
           python-version: '3.6'
       - run: pip install pytest requests
 
-      - name: MySQL Migration
-        working-directory: .
-        run: bash -c 'sleep 30 && docker-compose run web python manage.py migrate'
+      # - name: MySQL Migration
+      #   working-directory: .
+      #   run: bash -c 'sleep 30 && docker-compose run web python manage.py migrate'
 
       - name: GitHub Action for pytest
         working-directory: ./tests
-        run: bash -c 'pytest'
+        run: bash -c 'sleep 30 && pytest'
 
       - name: Docker-Compose down
         working-directory: .
