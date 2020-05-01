@@ -25,7 +25,7 @@ jobs:
 
       - name: GitHub Action for pytest
         working-directory: ./tests
-        run: bash -c 'sleep 20 && pytest'
+        run: bash -c 'sleep 35 && pytest'
 
       - name: Docker-Compose down
         working-directory: .
