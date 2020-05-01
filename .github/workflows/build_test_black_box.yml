@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Stop MySQL
+        run: mysqladmin -u root --password=root shutdown
+
       - name: Docker-Compose up
         working-directory: .
         run: docker-compose up --build
@@ -16,9 +20,9 @@ jobs:
           python-version: '3.6'
       - run: pip install pytest requests
 
-      # - name: MySQL Migration
-      #   working-directory: .
-      #   run: bash -c 'sleep 30 && docker-compose run web python manage.py migrate'
+      - name: MySQL Migration
+        working-directory: .
+        run: bash -c 'sleep 30 && docker-compose run web python manage.py migrate'
 
       - name: GitHub Action for pytest
         working-directory: ./tests
