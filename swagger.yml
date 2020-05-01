@@ -1,0 +1,267 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  version: "1.0.0"
+  title: "Swagger Petstore"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "petstore.swagger.io"
+basePath: "/v2"
+
+schemes:
+- "http"
+
+
+paths:
+  /api/info/create:
+    post:
+      tags:
+      - FeedDuckInfo
+      description: Feeding Duck Information Collection
+      parameters:
+        - in: body
+          name: collectData
+          schema:
+            required:
+              - time
+              - location
+              - numberOfDucks
+              - repeatDays
+              - food
+            properties:
+              time:
+                type: string
+                example: "2006-10-25 14:30"
+              location:
+                type: string
+                example: "Edmonton"
+              numberOfDucks:
+                type: integer
+                example: 10
+              repeatDays:
+                type: integer
+                example: 90
+              food:
+                type: array
+                example: [{"foodId": 1}, {"foodId": 2}]
+
+      responses:
+        '201':
+          description: OK
+          schema:
+            example:
+              {
+                "infoId": 15,
+                "food": [
+                    {
+                        "foodId": 1,
+                        "food": "Banana",
+                        "foodType": "Fruit",
+                        "foodCalories": 100.0
+                    },
+                    {
+                        "foodId": 3,
+                        "food": "Beef",
+                        "foodType": "Meat",
+                        "foodCalories": 200.0
+                    }
+                ],
+                "time": "2018-01-13T12:33:00-07:00",
+                "location": "Edmonton",
+                "numberOfDucks": 1,
+                "repeatDays": 1
+              }
+        '500':
+          description: BAD
+          schema:
+            example: "matching query does not exist"
+            
+  /api/foods/create:
+    post:
+      tags:
+      - Foods
+      description: Create Food Object
+      parameters:
+        - in: body
+          name: CreateFood
+          schema:
+            required:
+              - food
+              - foodType
+              - foodCalories
+            properties:
+              food:
+                type: string
+                example: "Apple"
+              foodType:
+                type: string
+                example: "Fruit"
+              foodCalories:
+                type: integer
+                example: 100
+              
+
+      responses:
+        '201':
+          description: OK
+          schema:
+            example:
+              {
+                  "foodId": 5,
+                  "food": "Apple",
+                  "foodType": "Fruit",
+                  "foodCalories": 1002.0
+              }
+        '500':
+          description: BAD
+          schema:
+            example: "matching query does not exist"
+            
+  /api/info/all/:
+    get:
+      tags:
+      - FeedDuckInfo
+      description: get all data from user input
+      responses:
+        '200':
+          description: get all informations
+          schema:
+            example: [
+              {
+                  "infoId": 4,
+                  "food": [],
+                  "time": "1990-12-31T16:59:00-07:00",
+                  "location": "1",
+                  "numberOfDucks": 1,
+                  "repeatDays": 1
+              },
+              {
+                  "infoId": 13,
+                  "food": [
+                      {
+                          "foodId": 1,
+                          "food": "Banana",
+                          "foodType": "Fruit",
+                          "foodCalories": 100.0
+                      }
+                  ],
+                  "time": "2018-01-13T12:33:00-07:00",
+                  "location": "Edmonton",
+                  "numberOfDucks": 1,
+                  "repeatDays": 1
+              }
+            ]
+            
+  /api/foods/all/:
+    get:
+      tags:
+      - Foods
+      description: get all foods info
+      responses:
+        '200':
+          description: get all foods info
+          schema:
+            example: [
+              {
+                  "foodId": 1,
+                  "food": "Banana",
+                  "foodType": "Fruit",
+                  "foodCalories": 100.0
+              },
+              {
+                  "foodId": 3,
+                  "food": "Beef",
+                  "foodType": "Meat",
+                  "foodCalories": 200.0
+              }
+            ]
+            
+  /api/foods/:id/delete/:
+    get:
+        tags:
+        - Foods
+        description: delete one food object
+        parameters:
+          - in: path
+            required: true
+            name: foodId
+            type: integer
+        responses:
+          '200':
+            description: get one day feeding information
+            schema:
+              example: {
+                  "foodId": 1,
+                  "food": "Banana",
+                  "foodType": "Fruit",
+                  "foodCalories": 100.0
+              } 
+          '404':
+            description: Not Found
+    delete:
+        tags:
+        - Foods
+        description: delete one food object
+        parameters:
+          - in: path
+            required: true
+            name: foodId
+            type: integer
+        responses:
+          '200':
+            description: OK
+  
+  /api/info/:id/delete/:
+    get:
+        tags:
+        - FeedDuckInfo
+        description: delete one food object
+        parameters:
+          - in: path
+            required: true
+            name: infoId
+            type: integer
+        responses:
+          '200':
+            description: get one day feeding information
+            schema:
+              example: {
+                  "infoId": 15,
+                  "food": [
+                      {
+                          "foodId": 1,
+                          "food": "Banana",
+                          "foodType": "Fruit",
+                          "foodCalories": 100.0
+                      },
+                      {
+                          "foodId": 3,
+                          "food": "Beef",
+                          "foodType": "Meat",
+                          "foodCalories": 200.0
+                      }
+                  ],
+                  "time": "2018-01-13T12:33:00-07:00",
+                  "location": "Edmonton",
+                  "numberOfDucks": 1,
+                  "repeatDays": 1
+              }
+          '404':
+            description: Not Found
+            
+    delete:
+        tags:
+        - FeedDuckInfo
+        description: delete one food object
+        parameters:
+          - in: path
+            required: true
+            name: foodId
+            type: integer
+        responses:
+          '200':
+            description: OK
