@@ -7,20 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-
       - name: Docker-Compose up
         working-directory: .
         run: docker-compose up -d --build
 
       - uses: actions/setup-python@v1
         with:
-          python-version: '3.6'
+          python-version: '3.7'
       - run: pip install pytest requests
 
       - name: GitHub Action for pytest
-        working-directory: .
-        run: pytest
+        working-directory: ./tests
+        run: bash -c 'sleep 30 && pytest'
 
-        - name: Docker-Compose down
-          working-directory: .
-          run: docker-compose down
+      - name: Docker-Compose down
+        working-directory: ./smart-home
+        run: docker-compose down
