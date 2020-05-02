@@ -3,6 +3,7 @@ import Button from 'antd/es/button';
 import './App.css';
 import connect from 'redux-connect-decorator'
 import Home from './components/home'
+import Food from './components/food'
 import AppNotFound from './components/notFound'
 import {
   BrowserRouter as Router,
@@ -19,6 +20,9 @@ class App extends Component {
         <Switch>
           <Route exact path='/'>
             <Home/>
+          </Route>
+          <Route exact path='/food'>
+            <Food/>
           </Route>
 
           <Route component={AppNotFound}></Route>

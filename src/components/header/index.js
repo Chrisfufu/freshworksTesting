@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import './style.css'
 
 // hearder url
-const iconImgUrl = process.env.PUBLIC_URL + '/django.jpg'
+const iconImgUrl = process.env.PUBLIC_URL + '/ducks.jpg'
 
 var iconStyle = {
   pc: {
@@ -50,7 +50,7 @@ function AppHeader() {
         className='layout-header-logo'
         alt="icon"
         style={{
-          width: "150px",
+          width: "300px",
           height: "100px"
         }}
         src={iconImgUrl}>

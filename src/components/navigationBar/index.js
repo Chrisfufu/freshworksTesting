@@ -1,22 +1,14 @@
 /**
  * Navigation bar component.
  */
-
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './index.css';
 import { Menu, Icon } from 'antd';
-import { Link, Redirect, useHistory, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
   ContactsOutlined
 } from '@ant-design/icons';
-import { connect } from 'react-redux';
-
-const { SubMenu } = Menu;
 
 class AppNavigationBar extends React.Component {
   state = {
@@ -26,11 +18,14 @@ class AppNavigationBar extends React.Component {
   handleClick = e => {
     console.log('click ', e.key);
     switch (e.key) {
-      case "contact":
-        this.props.history.push('/contacts')
+      case "feedInfo":
+        this.props.history.push('/')
+        break;
+      case "food":
+        this.props.history.push('/food')
         break;
       default:
-        this.props.history.push('/contacts')
+        this.props.history.push('/')
         break;
     }
     this.setState({
@@ -41,9 +36,13 @@ class AppNavigationBar extends React.Component {
   render() {
     return (
       <Menu onClick={this.handleClick} mode="horizontal">
-        <Menu.Item key="contact">
+        <Menu.Item key="feedInfo">
           <ContactsOutlined />
-            Contacts
+            Feed Information
+        </Menu.Item>
+        <Menu.Item key="food">
+          <ContactsOutlined />
+            Add Foods
         </Menu.Item>
 
       </Menu>

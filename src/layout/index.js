@@ -10,7 +10,7 @@ const layoutStyle = {
   minHeight: '100vh',
 }
 const contentStyle = {
-  display: 'flex',
+  // display: 'flex',
   height: '100%'
 }
 /**
