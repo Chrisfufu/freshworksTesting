@@ -26,11 +26,14 @@ class AppNavigationBar extends React.Component {
   handleClick = e => {
     console.log('click ', e.key);
     switch (e.key) {
-      case "contact":
-        this.props.history.push('/contacts')
+      case "feedInfo":
+        this.props.history.push('/')
+        break;
+      case "food":
+        this.props.history.push('/food')
         break;
       default:
-        this.props.history.push('/contacts')
+        this.props.history.push('/')
         break;
     }
     this.setState({
@@ -41,9 +44,13 @@ class AppNavigationBar extends React.Component {
   render() {
     return (
       <Menu onClick={this.handleClick} mode="horizontal">
-        <Menu.Item key="contact">
+        <Menu.Item key="feedInfo">
           <ContactsOutlined />
-            Contacts
+            Feed Information
+        </Menu.Item>
+        <Menu.Item key="food">
+          <ContactsOutlined />
+            Add Foods
         </Menu.Item>
 
       </Menu>
