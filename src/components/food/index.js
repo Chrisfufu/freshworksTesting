@@ -94,8 +94,8 @@ class FoodForm extends React.Component {
                     message: 'Please input food calories!'
                   },
                   {
-                    type: 'float',
-                    Message: 'Please enter a float',
+                    type: 'number',
+                    Message: 'Please enter a number/float',
                     transform:(value)=> {return Number(value)}
                   },
                 ],
