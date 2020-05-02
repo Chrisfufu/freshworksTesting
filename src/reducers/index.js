@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
 
-import contact from "./contactReducer"
+import food from "./foodReducer"
 
 export default combineReducers({
-  contact,
+  food
 })
