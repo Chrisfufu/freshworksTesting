@@ -1,22 +1,14 @@
 /**
  * Navigation bar component.
  */
-
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './index.css';
 import { Menu, Icon } from 'antd';
-import { Link, Redirect, useHistory, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
   ContactsOutlined
 } from '@ant-design/icons';
-import { connect } from 'react-redux';
-
-const { SubMenu } = Menu;
 
 class AppNavigationBar extends React.Component {
   state = {
