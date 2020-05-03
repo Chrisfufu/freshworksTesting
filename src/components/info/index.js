@@ -43,7 +43,6 @@ class InfoForm extends React.Component {
 
   };
   onChange = (date, dateString)=> {
-    console.log(date, dateString);
     this.setState({
         startTime: dateString[0],
         endTime: dateString[1]
@@ -128,7 +127,7 @@ class InfoForm extends React.Component {
                 <Select
                   mode="multiple"
                   style={{ width: '100%' }}
-                  placeholder="select foods"
+                  placeholder="Select foods"
                   optionLabelProp="label"
                 >
                 {foods.map(d => (

@@ -40,8 +40,6 @@ class FoodForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        // this.props.dispatch(login(values))
-        console.log(values);
         this.props.dispatch(addFood(values))
       }
     });
