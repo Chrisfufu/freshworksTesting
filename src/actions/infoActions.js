@@ -9,13 +9,13 @@ export function addInfo(data, startTime, endTime) {
   var date1 = new Date(startTime.substring(0, 10));
   var date2 = new Date(endTime.substring(0, 10));
   var difference = date2.getTime() - date1.getTime();
-  var difference = (difference / (1000 * 3600 * 24)) + 1;
+  var differenceTime = (difference / (1000 * 3600 * 24)) + 1;
   var info = {
     "food": foods,
     "time": startTime,
     "location": data.location,
     "numberOfDucks": data.numberOfDucks,
-    "repeatDays": difference
+    "repeatDays": differenceTime
   }
   // {
   //   "food": [

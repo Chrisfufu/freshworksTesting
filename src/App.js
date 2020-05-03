@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import Button from 'antd/es/button';
 import './App.css';
-import connect from 'redux-connect-decorator'
 import Info from './components/info'
 import Food from './components/food'
 import AppNotFound from './components/notFound'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 class App extends Component {
