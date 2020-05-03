@@ -6,12 +6,15 @@ export default function reducer(state={
   }, action) {
 
     switch (action.type) {
+      // adding information
       case "ADD_INFO": {
         return {...state, posting: true}
       }
+      // there is an error when adding information
       case "ADD_INFO_REJECTED": {
         return {...state, posting: false, error: action.payload}
       }
+      // successfully adding information
       case "ADD_INFO_FULFILLED": {
         return {
           ...state,

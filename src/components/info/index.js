@@ -21,7 +21,8 @@ const { Option } = Select;
 @connect((store) => {
   return {
     foodsFetched: store.food.foodsFetched,
-    posted: store.info.posted
+    posted: store.info.posted,
+    info: store.info.info,
   };
 })
 // this is the first tab
@@ -93,8 +94,8 @@ class InfoForm extends React.Component {
   // react lifecycle, when finished uploading the information of feeding the ducks,
   // then showModal
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.posted !== nextProps.posted &&
-      nextProps.posted !== undefined)
+    if(this.props.info !== nextProps.info &&
+      nextProps.info !== undefined)
       {
         this.showModal()
       }

@@ -17,6 +17,7 @@ export function addInfo(data, startTime, endTime) {
     "numberOfDucks": data.numberOfDucks,
     "repeatDays": differenceTime
   }
+  // example of adding an information json:
   // {
   //   "food": [
   //       {
@@ -31,6 +32,8 @@ export function addInfo(data, startTime, endTime) {
   //   "numberOfDucks": 2,
   //   "repeatDays": 1
   // }
+
+  // post method, create a feeding information
   return function(dispatch) {
     dispatch({type: "ADD_INFO"});
     axios(URL_PREFIX + "/api/info/create/", {
