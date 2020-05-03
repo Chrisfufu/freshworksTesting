@@ -2,7 +2,7 @@ import axios from "axios";
 import { URL_PREFIX } from './utils';
 
 export function addFood(data) {
-
+  // post api, add a food object
   return function(dispatch) {
     dispatch({type: "ADD_FOOD"});
     axios(URL_PREFIX + "/api/foods/create/", {
@@ -19,6 +19,8 @@ export function addFood(data) {
 }
 
 export function fetchFood() {
+  // get method,
+  // fetch all food objects
   return function(dispatch) {
     dispatch({type: "FETCH_FOODS"});
     axios(URL_PREFIX + "/api/foods/all/", {

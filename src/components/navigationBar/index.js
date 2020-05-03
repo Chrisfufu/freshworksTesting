@@ -16,7 +16,6 @@ class AppNavigationBar extends React.Component {
   };
 
   handleClick = e => {
-    console.log('click ', e.key);
     switch (e.key) {
       case "feedInfo":
         this.props.history.push('/info')

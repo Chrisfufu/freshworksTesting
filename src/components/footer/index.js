@@ -22,7 +22,7 @@ const footer = (style1, style2, copyrightString) => {
       <div className="layout-footer-content" style={style2}>
         <div className="footerContact">
           <a
-            href="./customerServices"
+            href="./info"
             style={{
               display: 'flex',
               justifyContent:'center',
