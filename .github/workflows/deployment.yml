@@ -30,4 +30,7 @@ jobs:
           serve -s build -l 3000 &
           echo "serve port 3000"
           bash -c 'sleep 5'
+          echo "before docker compose down"
+          sudo docker-compose down
+          bash -c 'sleep 30'
           sudo docker-compose up -d --build
