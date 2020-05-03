@@ -54,6 +54,7 @@ jobs:
           npm run build
           bash -c 'sleep 50'
           serve -s build -l 3000 &
+          echo "serve port 3000"
           echo "before docker compose down"
           sudo docker-compose down
           bash -c 'sleep 30'
