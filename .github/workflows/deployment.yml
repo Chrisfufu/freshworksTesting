@@ -32,6 +32,7 @@ jobs:
 
   Deployment-Frontend:
     runs-on: ubuntu-latest
+    timeout-minutes: 4
     needs: [Deployment-Backend]
     steps:
     - uses: actions/checkout@v1
@@ -59,3 +60,6 @@ jobs:
           bash -c 'sleep 30'
           cd ..
         wait-on: http://localhost:3000
+        
+    - name: cancelling
+      uses: andymckay/cancel-action@0.2
