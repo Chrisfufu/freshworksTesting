@@ -1,0 +1,63 @@
+name: Auto Deployment
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  pytest-integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Docker-Compose up
+        working-directory: .
+        run: docker-compose up -d --build
+
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.6'
+      - run: pip install pytest requests
+
+      - name: Docker PS
+        run: docker ps
+
+      - name: GitHub Action for pytest
+        working-directory: ./tests
+        run: bash -c 'sleep 30 && pytest -s'
+
+      - name: Docker-Compose down
+        working-directory: .
+        run: docker-compose down
+
+  Deployment:
+    runs-on: ubuntu-latest
+    needs: [pytest-integration-tests]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Executing remote command
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd freshworksTesting
+          echo "         project folder"
+          git pull
+          bash -c 'sleep 5'
+          git checkout master
+          git pull
+          bash -c 'sleep 5'
+          fuser -k -n tcp 3000
+          npm run build
+          bash -c 'sleep 50'
+          serve -s build -l 3000 &
+          echo "before docker compose down"
+          sudo docker-compose down
+          bash -c 'sleep 30'
+          df -h
+          echo "after docker compose down"
+          sudo docker-compose up -d --build
+          bash -c 'sleep 30'
