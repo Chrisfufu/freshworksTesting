@@ -56,10 +56,6 @@ jobs:
           npm run build
           bash -c 'sleep 30'
           serve -s build -n -l 3000 &
-          echo "serve port 3000"
           bash -c 'sleep 30'
-          cd ..
+          echo "serve port 3000"
         wait-on: http://localhost:3000
-        
-    - name: cancelling
-      uses: andymckay/cancel-action@0.2
