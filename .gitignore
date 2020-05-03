@@ -16,3 +16,4 @@ package-lock.json
 migrations
 .pytest_cache
 yarn.lock
+__pycache__
