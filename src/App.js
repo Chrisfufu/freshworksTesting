@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'antd/es/button';
 import './App.css';
 import connect from 'redux-connect-decorator'
-import Home from './components/home'
+import Info from './components/info'
 import Food from './components/food'
 import AppNotFound from './components/notFound'
 import {
@@ -18,8 +18,8 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path='/'>
-            <Home/>
+          <Route exact path='/info'>
+            <Info/>
           </Route>
           <Route exact path='/food'>
             <Food/>

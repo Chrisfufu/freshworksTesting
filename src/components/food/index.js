@@ -129,7 +129,7 @@ class FoodForm extends React.Component {
               </Button>
             ]}
           >
-            <p>You have created a food</p>
+            <p>You have successfully created a food</p>
           </Modal>
       </AppLayout>
     );

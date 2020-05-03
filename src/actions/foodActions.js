@@ -17,3 +17,18 @@ export function addFood(data) {
     })
   }
 }
+
+export function fetchFood() {
+  return function(dispatch) {
+    dispatch({type: "FETCH_FOODS"});
+    axios(URL_PREFIX + "/api/foods/all/", {
+      method: "get"
+    })
+    .then((response) => {
+      dispatch({type: "FETCH_FOODS_FULFILLED", payload: response.data})
+    })
+    .catch((err) => {
+      dispatch({type: "FETCH_FOODS_REJECTED", payload: err})
+    })
+  }
+}
