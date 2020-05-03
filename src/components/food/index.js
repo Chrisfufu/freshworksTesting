@@ -141,16 +141,28 @@ class FoodForm extends React.Component {
             these are buttons to submit the answers or reset the form
           */}
           <Form.Item
-            className="buttonCenter"
-            wrapperCol={{ ...layout.wrapperCol, offset: 4 }}
+            style={{
+              display: 'flex',
+              justifyContent:'center',
+              alignItems:'center'
+            }}
           >
-            <Button type="primary" htmlType="submit" >
-              Submit
-            </Button>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent:'center',
+                alignItems:'center'
+              }}
+              >
+              <Button type="primary" htmlType="submit" >
+                Submit
+              </Button>
 
-            <Button type="primary" htmlType="button" onClick={this.onReset}>
-              Reset
-            </Button>
+              <Button type="primary" htmlType="button" onClick={this.onReset}>
+                Reset
+              </Button>
+            </div>
+
           </Form.Item>
         </Form>
 
