@@ -27,7 +27,8 @@ jobs:
           echo "before docker compose down"
           sudo docker-compose down
           bash -c 'sleep 30'
-          sudo docker-compose up -d --build &
+          sudo docker-compose up -d --build
+          bash -c 'sleep 30'
 
     Deployment Frontend:
       runs-on: ubuntu-latest
@@ -41,6 +42,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
+            ll
             cd freshworksTesting
             echo "         project folder"
             git pull
@@ -51,6 +53,6 @@ jobs:
             fuser -k -n tcp 3000
             npm run build
             bash -c 'sleep 30'
-            serve -s build -l 3000 &
+            serve -s build -l 3000
             echo "serve port 3000"
-            bash -c 'sleep 5'
+            bash -c 'sleep 30'
