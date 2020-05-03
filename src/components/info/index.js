@@ -202,16 +202,26 @@ class InfoForm extends React.Component {
             </Form.Item>
 
             <Form.Item
-              className="buttonCenter"
-              wrapperCol={{ ...layout.wrapperCol, offset: 4 }}
+              style={{
+                display: 'flex',
+                justifyContent:'center',
+                alignItems:'center'
+              }}
             >
-              <Button type="primary" htmlType="submit" >
-                Submit
-              </Button>
+              <div style={{
+                display: 'flex',
+                justifyContent:'center',
+                alignItems:'center'
+              }}
+              >
+                <Button type="primary" htmlType="submit" >
+                  Submit
+                </Button>
 
-              <Button type="primary" htmlType="button" onClick={this.onReset}>
-                Reset
-              </Button>
+                <Button type="primary" htmlType="button" onClick={this.onReset}>
+                  Reset
+                </Button>
+              </div>
             </Form.Item>
           </Form>
           <Modal
