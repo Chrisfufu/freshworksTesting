@@ -30,29 +30,29 @@ jobs:
           sudo docker-compose up -d --build
           bash -c 'sleep 30'
 
-    Deployment Frontend:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v1
-      - name: Executing remote command
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            ll
-            cd freshworksTesting
-            echo "         project folder"
-            git pull
-            bash -c 'sleep 1'
-            git checkout master
-            git pull
-            bash -c 'sleep 1'
-            fuser -k -n tcp 3000
-            npm run build
-            bash -c 'sleep 30'
-            serve -s build -l 3000
-            echo "serve port 3000"
-            bash -c 'sleep 30'
+  Deployment Frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Executing remote command
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          ll
+          cd freshworksTesting
+          echo "         project folder"
+          git pull
+          bash -c 'sleep 1'
+          git checkout master
+          git pull
+          bash -c 'sleep 1'
+          fuser -k -n tcp 3000
+          npm run build
+          bash -c 'sleep 30'
+          serve -s build -l 3000
+          echo "serve port 3000"
+          bash -c 'sleep 30'
