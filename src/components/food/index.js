@@ -47,7 +47,7 @@ class FoodForm extends React.Component {
     });
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.food !== nextProps.food &&
       nextProps.food !== undefined)
     {
