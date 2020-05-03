@@ -58,3 +58,4 @@ jobs:
           echo "serve port 3000"
           bash -c 'sleep 30'
           cd ..
+        wait-on: http://localhost:3000
