@@ -4,7 +4,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import { withRouter } from "react-router-dom";
 import {
   ContactsOutlined
@@ -19,7 +19,7 @@ class AppNavigationBar extends React.Component {
     console.log('click ', e.key);
     switch (e.key) {
       case "feedInfo":
-        this.props.history.push('/')
+        this.props.history.push('/info')
         break;
       case "food":
         this.props.history.push('/food')

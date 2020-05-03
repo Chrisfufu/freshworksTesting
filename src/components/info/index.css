@@ -1,0 +1,10 @@
+.formSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttonCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
