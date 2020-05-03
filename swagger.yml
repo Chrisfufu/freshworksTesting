@@ -79,7 +79,7 @@ paths:
           description: BAD
           schema:
             example: "matching query does not exist"
-            
+
   /api/foods/create:
     post:
       tags:
@@ -103,7 +103,7 @@ paths:
               foodCalories:
                 type: integer
                 example: 100
-              
+
 
       responses:
         '201':
@@ -120,7 +120,7 @@ paths:
           description: BAD
           schema:
             example: "matching query does not exist"
-            
+
   /api/info/all/:
     get:
       tags:
@@ -155,7 +155,7 @@ paths:
                   "repeatDays": 1
               }
             ]
-            
+
   /api/foods/all/:
     get:
       tags:
@@ -179,8 +179,8 @@ paths:
                   "foodCalories": 200.0
               }
             ]
-            
-  /api/foods/:id/delete/:
+
+  /api/foods/:id/:
     get:
         tags:
         - Foods
@@ -199,7 +199,7 @@ paths:
                   "food": "Banana",
                   "foodType": "Fruit",
                   "foodCalories": 100.0
-              } 
+              }
           '404':
             description: Not Found
     delete:
@@ -214,8 +214,8 @@ paths:
         responses:
           '200':
             description: OK
-  
-  /api/info/:id/delete/:
+
+  /api/info/:id/:
     get:
         tags:
         - FeedDuckInfo
@@ -252,7 +252,7 @@ paths:
               }
           '404':
             description: Not Found
-            
+
     delete:
         tags:
         - FeedDuckInfo
