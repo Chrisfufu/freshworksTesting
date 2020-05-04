@@ -6,6 +6,9 @@ Created with React + Redux, Django + Django Rest Framework.
 ### Website on server: http://199.116.235.221:3000/info
 ### More details in Deliverables: https://github.com/Chrisfufu/freshworksTesting/wiki/Deliverables 
 
+### User Manual
+1. https://github.com/Chrisfufu/freshworksTesting/wiki/User-Manual    
+
 ### To start the BackEnd locally:  
 1. docker-compose up -d --build   
 
