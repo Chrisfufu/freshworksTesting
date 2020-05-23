@@ -63,11 +63,11 @@ class FeedDuckInfoSerializer(ModelSerializer):
             # the date needs add datetime.timedelta(days=day),
             # for example: 2020-04-30, next date will automatically return
             # 2020-05-01
-            date = validated_data['time']
+            dateStart = validated_data['time']
             repeatDay = validated_data['repeatDays']
             # use a for loop to create Feed Duck.
             for day in range(validated_data['repeatDays']):
-                date = date+datetime.timedelta(days=day)
+                date = dateStart+datetime.timedelta(days=day)
                 info = FeedDuckInfo.objects.create(
                     time = date,
                     location = validated_data['location'],
