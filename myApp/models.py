@@ -12,8 +12,8 @@ import uuid
 class KeyInfo(models.Model):
     keyId = models.AutoField(primary_key=True)
     name = models.TextField(editable=False)
-    description = models.TextField(editable=False)
-    key = models.CharField(unique=True)
+    description = models.TextField()
+    key = models.CharField(unique=True, editable=False)
     expiryTime = models.DateTimeField()
     class Meta:
         verbose_name = "KeyInfo"
