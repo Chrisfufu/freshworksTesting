@@ -32,18 +32,6 @@ class Info extends React.Component {
   };
 
 
-  // onChange is used for catching the changes for the DatePicker
-  // and then pass the date String to start time and end time.
-  // the requirements said that we need to have a duriation for
-  // the date, so, this DatePicker allows users to select a range of date.
-  // and pick time.
-  onChange = (date, dateString)=> {
-    this.setState({
-        startTime: dateString[0],
-        endTime: dateString[1]
-      });
-  }
-
   // react lifecycle, this is to fetch all the foods in the database,
   // then it can display all food in the selection options.
   componentDidMount(){
@@ -66,6 +54,7 @@ class Info extends React.Component {
       sortedInfo: sorter,
     });
   };
+
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
@@ -112,6 +101,7 @@ class Info extends React.Component {
         text
       ),
   });
+
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     this.setState({
@@ -192,7 +182,7 @@ class Info extends React.Component {
           */}
         <div>
           <br></br>
-          <Table columns={columns} dataSource={data}  >
+          <Table columns={columns} dataSource={data}  onChange={this.handleChange}>
           
           </Table>
         </div>
