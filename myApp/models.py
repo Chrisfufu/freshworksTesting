@@ -3,38 +3,18 @@ from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 from django.core.validators import RegexValidator
 from django.core.validators import validate_email
+import uuid
 # Create your models here.
 # import datetime
 
 # FeedDuckInfo Model
 # ManyToManyField through DuckFood.
-class FeedDuckInfo(models.Model):
-    infoId = models.AutoField(primary_key=True)
-    time = models.DateTimeField()
-    location = models.TextField()
-    numberOfDucks = models.IntegerField()
-    repeatDays = models.IntegerField()
-    food = models.ManyToManyField('Food', through = 'DuckFood')
+class KeyInfo(models.Model):
+    keyId = models.AutoField(primary_key=True)
+    name = models.TextField(editable=False)
+    description = models.TextField(editable=False)
+    key = models.CharField(unique=True)
+    expiryTime = models.DateTimeField()
     class Meta:
-        verbose_name = "FeedDuckInfo"
-        db_table = "FeedDuckInfo"
-
-# intermidia model, connect to FeedDuckInfo and Food model
-# they are many to many relationship
-class DuckFood(models.Model):
-    duckFoodId = models.AutoField(primary_key=True)
-    infoId = models.ForeignKey("FeedDuckInfo",db_column = 'infoId', on_delete=models.CASCADE)
-    foodId = models.ForeignKey("Food",db_column = 'foodId', on_delete=models.CASCADE)
-    class Meta:
-        verbose_name = "Duck Food"
-        db_table = "DuckFood"
-
-# Food model, it contains food information. 
-class Food(models.Model):
-    foodId = models.AutoField(primary_key=True)
-    food = models.TextField()
-    foodType = models.TextField()
-    foodCalories = models.FloatField()
-    class Meta:
-        verbose_name = "Food"
-        db_table = "Food"
+        verbose_name = "KeyInfo"
+        db_table = "keyinfo"
