@@ -12,12 +12,7 @@ import uuid
 class KeyInfoListSerializer(ModelSerializer):
     class Meta:
         model = KeyInfo
-        fields = [
-            'keyId',
-            'name',
-            'description',
-            'expiryTime'
-        ]
+        fields = '__all__'
 
 class KeyInfoCreateSerializer(ModelSerializer):
     class Meta:
@@ -39,7 +34,7 @@ class KeyInfoCreateSerializer(ModelSerializer):
         }
 
     def create(self, validated_data):
-        
+
         # atomic transaction.
         with transaction.atomic():
             # create a new key information.
@@ -58,7 +53,7 @@ class KeyInfoCreateSerializer(ModelSerializer):
                     key = key
                 )
             return info
-    
+
 '''
 DateTimeField Acceptance Format
 [
@@ -129,7 +124,7 @@ class KeyInfoRefreshSerializer(ModelSerializer):
                 "required": False,
             }
         }
-    
+
     # extend the expiration.
     def update(self, instance, validated_data):
         with transaction.atomic():

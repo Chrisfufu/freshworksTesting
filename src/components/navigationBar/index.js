@@ -7,21 +7,26 @@ import './index.css';
 import { Menu } from 'antd';
 import { withRouter } from "react-router-dom";
 import {
-  ContactsOutlined
+  UserAddOutlined,
+  BarsOutlined,
+  ReloadOutlined
 } from '@ant-design/icons';
 
 class AppNavigationBar extends React.Component {
   state = {
-    current: 'mail',
+    current: '',
   };
 
   handleClick = e => {
     switch (e.key) {
-      case "feedInfo":
-        this.props.history.push('/info')
+      case "info":
+        this.props.history.push('/')
         break;
-      case "food":
-        this.props.history.push('/food')
+      case "addInfo":
+        this.props.history.push('/addInfo')
+        break;
+      case "refreshInfo":
+        this.props.history.push('/refreshInfo')
         break;
       default:
         this.props.history.push('/')
@@ -35,15 +40,18 @@ class AppNavigationBar extends React.Component {
   render() {
     return (
       <Menu onClick={this.handleClick} mode="horizontal">
-        <Menu.Item key="feedInfo">
-          <ContactsOutlined />
-            Feed Information
+        <Menu.Item key="info">
+          <BarsOutlined />
+            Keys Information
         </Menu.Item>
-        <Menu.Item key="food">
-          <ContactsOutlined />
-            Add Foods
+        <Menu.Item key="addInfo">
+          <UserAddOutlined />
+            Add Keys
         </Menu.Item>
-
+        <Menu.Item key="refreshInfo">
+          <ReloadOutlined />
+            Add Keys
+        </Menu.Item>
       </Menu>
     );
   }

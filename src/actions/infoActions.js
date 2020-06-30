@@ -1,38 +1,13 @@
 import axios from "axios";
 import { URL_PREFIX } from './utils';
 
-export function addInfo(data, startTime, endTime) {
-  var foods = [];
-  for (var i = 0; i < data.foodSelected.length; i++){
-    foods.push({"foodId": data.foodSelected[i]})
-  }
-  var date1 = new Date(startTime.substring(0, 10));
-  var date2 = new Date(endTime.substring(0, 10));
-  var difference = date2.getTime() - date1.getTime();
-  var differenceTime = (difference / (1000 * 3600 * 24)) + 1;
+export function addInfo(data) {
+  
   var info = {
-    "food": foods,
-    "time": startTime,
-    "location": data.location,
-    "numberOfDucks": data.numberOfDucks,
-    "repeatDays": differenceTime
+    "description": data.description,
+    "expiryTime": new Date(data.expiryTime),
+    "name": data.name
   }
-  // example of adding an information json:
-  // {
-  //   "food": [
-  //       {
-  //           "foodId": 1
-  //       },
-  //       {
-  //           "foodId": 2
-  //       }
-  //   ],
-  //   "time": "2020-05-10T00:12:00-06:00",
-  //   "location": "Edmonton",
-  //   "numberOfDucks": 2,
-  //   "repeatDays": 1
-  // }
-
   // post method, create a feeding information
   return function(dispatch) {
     dispatch({type: "ADD_INFO"});
@@ -45,6 +20,41 @@ export function addInfo(data, startTime, endTime) {
     })
     .catch((err) => {
       dispatch({type: "ADD_INFO_REJECTED", payload: err})
+    })
+  }
+}
+
+export function fetchKeys() {
+  // get method,
+  // fetch all food objects
+  return function(dispatch) {
+    dispatch({type: "FETCH_KEYS"});
+    axios(URL_PREFIX + "/api/info/all/", {
+      method: "get"
+    })
+    .then((response) => {
+      dispatch({type: "FETCH_KEYS_FULFILLED", payload: response.data})
+    })
+    .catch((err) => {
+      dispatch({type: "FETCH_KEYS_REJECTED", payload: err})
+    })
+  }
+}
+
+
+export function refreshKeys(data) {
+  // put method,
+  // fetch all food objects
+  return function(dispatch) {
+    dispatch({type: "REFRESH_KEYS"});
+    axios(URL_PREFIX + "/api/info/refresh/" + data +"/", {
+      method: "put"
+    })
+    .then((response) => {
+      dispatch({type: "REFRESH_KEYS_FULFILLED", payload: response.data})
+    })
+    .catch((err) => {
+      dispatch({type: "REFRESH_KEYS_REJECTED", payload: err})
     })
   }
 }

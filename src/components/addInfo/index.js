@@ -2,9 +2,14 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
 import connect from 'redux-connect-decorator'
-import { Form, Icon, Modal, Input, Button } from 'antd';
+import { Form, Icon, Modal, Input, Button, DatePicker } from 'antd';
 import AppLayout from '../../layout';
-import { addFood } from '../../actions/foodActions'
+import { addInfo } from '../../actions/infoActions';
+import {
+  UserOutlined,
+  FileTextOutlined
+} from '@ant-design/icons';
+
 const layout = {
   labelCol: {
     span: 4,
@@ -16,8 +21,8 @@ const layout = {
 // connect to store.
 @connect((store) => {
   return {
-    error: store.food.error,
-    food: store.food.foods,
+    error: store.info.error,
+    info: store.info.info,
   };
 })
 
@@ -25,7 +30,8 @@ const layout = {
 // it is a form by using Ant Design.
 // this tab creates a food object once at a time by clicking the submit button.
 // shows success popup window when successfully upload the food.
-class FoodForm extends React.Component {
+class AddInfo extends React.Component {
+  formRef = React.createRef();
   // these are state in the class
   state = { visible: false };
 
@@ -52,89 +58,59 @@ class FoodForm extends React.Component {
   // handleSubmit calls the API in the action.
   // pass three parameters to the addFood method,
   // it only pass all the values to the method
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        this.props.dispatch(addFood(values))
-      }
-    });
+  handleSubmit = values  => {
+    this.props.dispatch(addInfo(values))
   };
 
   // react lifecycle, when finished uploading the information of feeding the ducks,
   // then showModal
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.food !== nextProps.food &&
-      nextProps.food !== undefined)
+    if(this.props.info !== nextProps.info &&
+      nextProps.info !== undefined && 
+      nextProps.info.length !== 0
+      )
     {
       this.showModal()
     }
-
   }
 
   // this method is used for reset the form.
   onReset = () => {
-    this.props.form.resetFields();
+    this.formRef.current.resetFields();
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    console.log(this.props);
     return (
       <AppLayout style={{overflow: "auto"}}>
+        <br></br>
         {/* create a form */}
-        <Form {...layout} onSubmit={this.handleSubmit} >
+        <Form {...layout} ref={this.formRef} onFinish={this.handleSubmit} >
 
           {/* form item, this is the food name */}
           <Form.Item className="formSection">
-            {getFieldDecorator('food', {
-              rules: [{ required: true, message: 'Please input the food name!' }],
-            })(
-              <Input
-                prefix={<Icon type="apple" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Food Name"
-              />,
-            )}
+            
+            <Form.Item name="name" rules={[{ required: true }]}>
+              <Input 
+                prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
+                placeholder="Name"
+              />
+            </Form.Item>
           </Form.Item>
 
-          {/*
-            get the food type from users
-          */}
           <Form.Item className="formSection">
-            {getFieldDecorator('foodType', {
-              rules: [{ required: true, message: 'Please input food type!' }],
-            })(
-              <Input
-                prefix={<Icon type="tags" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="foodType"
-                placeholder="Food Type"
-              />,
-            )}
+            <Form.Item name="description" rules={[{ required: true }]}>
+              <Input 
+                prefix={<FileTextOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
+                placeholder="description"
+              />
+            </Form.Item>
           </Form.Item>
 
-          {/*
-            get How much food the ducks are fed
-            it has to be a number/float
-          */}
           <Form.Item className="formSection">
-            {getFieldDecorator('foodCalories', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input food calories!'
-                },
-                {
-                  type: 'number',
-                  Message: 'Please enter a number/float',
-                  transform:(value)=> {return Number(value)}
-                },
-              ],
-            })(
-              <Input
-                prefix={<Icon type="calculator" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="foodCalories"
-                placeholder="Food Calories"
-              />,
-            )}
+            <Form.Item name="expiryTime" rules={[{ required: true }]}>
+              <DatePicker  />
+            </Form.Item>
           </Form.Item>
 
           {/*
@@ -178,12 +154,11 @@ class FoodForm extends React.Component {
             </Button>
           ]}
         >
-          <p>You have successfully created a food</p>
+          <p>You have successfully created a key information</p>
         </Modal>
       </AppLayout>
     );
   }
 }
 
-const Food = Form.create({ name: 'foodform' })(FoodForm);
-export default Food;
+export default AddInfo;

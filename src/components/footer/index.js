@@ -2,8 +2,9 @@
  * Footer component.
  */
 import React from "react";
-import { Layout, Icon } from "antd";
+import { Layout } from "antd";
 import "./style.less";
+import { FacebookOutlined, TwitterOutlined } from '@ant-design/icons';
 const { Footer } = Layout;
 
 const copyrightString = "React & Redux";
@@ -22,7 +23,7 @@ const footer = (style1, style2, copyrightString) => {
       <div className="layout-footer-content" style={style2}>
         <div className="footerContact">
           <a
-            href="./info"
+            href="./"
             style={{
               display: 'flex',
               justifyContent:'center',
@@ -38,15 +39,9 @@ const footer = (style1, style2, copyrightString) => {
               alignItems:'center'
             }}
           >
-            <Icon
-              type="twitter-square"
-              theme="filled"
-              style={{ fontSize: "1.8rem", color: "#000000", margin: "0.5rem" }}
-            />
-            <Icon
-              type="facebook"
-              style={{ fontSize: "1.8rem", color: "#000000", margin: "0.5rem" }}
-            />
+            <TwitterOutlined style={{ fontSize: "1.8rem", color: "#000000", margin: "0.5rem" }}/>
+            <FacebookOutlined style={{ fontSize: "1.8rem", color: "#000000", margin: "0.5rem" }}/>
+            
           </div>
           <p style={{color: "#000000"}}>{copyrightString}</p>
         </div>

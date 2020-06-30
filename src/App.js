@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Info from './components/info'
-import Food from './components/food'
+import AddInfo from './components/addInfo'
+import RefreshKey from './components/refresh'
 import AppNotFound from './components/notFound'
 import {
   BrowserRouter as Router,
@@ -15,13 +16,15 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path='/info'>
+          <Route exact path='/'>
             <Info/>
           </Route>
-          <Route exact path='/food'>
-            <Food/>
+          <Route exact path='/addInfo'>
+            <AddInfo/>
           </Route>
-
+          <Route exact path='/refreshInfo'>
+            <RefreshKey/>
+          </Route>
           <Route component={AppNotFound}></Route>
         </Switch>
       </Router>

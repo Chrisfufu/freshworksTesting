@@ -30,3 +30,4 @@ class KeyInfoUpdateAPIView(RetrieveUpdateAPIView):
 class KeyInfoRefreshAPIView(RetrieveUpdateAPIView):
     serializer_class = KeyInfoRefreshSerializer
     queryset = KeyInfo.objects.all()
+    lookup_field = 'key'
