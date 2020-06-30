@@ -7,7 +7,9 @@ from django.db import transaction
 import datetime
 import uuid
 
-class KeyInfoSerializer(ModelSerializer):
+# List API View
+# it does not show the uuid
+class KeyInfoListSerializer(ModelSerializer):
     class Meta:
         model = KeyInfo
         fields = [
@@ -16,15 +18,34 @@ class KeyInfoSerializer(ModelSerializer):
             'description',
             'expiryTime'
         ]
+
+class KeyInfoCreateSerializer(ModelSerializer):
+    class Meta:
+        model = KeyInfo
+        fields = "__all__"
+        extra_kwargs = {
+            "name": {
+                "read_only": False,
+                "required": False,
+            },
+            "description": {
+                "read_only": False,
+                "required": False,
+            },
+            "expiryTime": {
+                "read_only": False,
+                "required": False,
+            }
+        }
+
     def create(self, validated_data):
         
         # atomic transaction.
         with transaction.atomic():
-            # get many to many field: food.
-            # in order to get the repeat days set up properly,
-            # the date needs add datetime.timedelta(days=day),
-            # for example: 2020-04-30, next date will automatically return
-            # 2020-05-01
+            # create a new key information.
+            # the key is using UUID.
+            # Only after creation, the key will show up
+            # other than creation, and listing, key does not show up.
             name = validated_data['name']
             description = validated_data['description']
             expiryTime = validated_data['expiryTime']
@@ -38,11 +59,6 @@ class KeyInfoSerializer(ModelSerializer):
                 )
             return info
     
-    def update(self, instance, validated_data):
-        with transaction.atomic():
-            instance.description = validated_data.pop('description', False)
-            instance.save()
-            return instance
 '''
 DateTimeField Acceptance Format
 [
@@ -60,3 +76,67 @@ DateTimeField Acceptance Format
     '%m/%d/%y',              # '10/25/06'
 ]
 '''
+
+
+class KeyInfoUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = KeyInfo
+        fields = [
+            'name',
+            'description',
+            'expiryTime'
+        ]
+        extra_kwargs = {
+            "name": {
+                "read_only": True,
+                "required": False,
+            },
+            "description": {
+                "read_only": False,
+                "required": False,
+            },
+            "expiryTime": {
+                "read_only": True,
+                "required": False,
+            }
+        }
+    # edit description only
+    def update(self, instance, validated_data):
+        with transaction.atomic():
+            instance.description = validated_data.pop('description', False)
+            instance.save()
+            return instance
+
+class KeyInfoRefreshSerializer(ModelSerializer):
+    class Meta:
+        model = KeyInfo
+        fields = [
+            'name',
+            'description',
+            'expiryTime'
+        ]
+        extra_kwargs = {
+            "name": {
+                "read_only": True,
+                "required": False,
+            },
+            "description": {
+                "read_only": True,
+                "required": False,
+            },
+            "expiryTime": {
+                "read_only": True,
+                "required": False,
+            }
+        }
+    
+    # extend the expiration.
+    def update(self, instance, validated_data):
+        with transaction.atomic():
+            print(instance.keyId)
+            dateStart = KeyInfo.objects.filter(keyId = instance.keyId).first().expiryTime
+            print(dateStart,'\n\n\n')
+            date = dateStart + datetime.timedelta(days=1)
+            instance.expiryTime = date
+            instance.save()
+            return instance

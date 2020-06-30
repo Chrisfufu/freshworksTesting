@@ -8,19 +8,25 @@ from rest_framework.generics import (
     RetrieveUpdateAPIView,
     CreateAPIView,
     DestroyAPIView,
+    UpdateAPIView,
 )
 
 # this allows user to create information
 class KeyInfoCreateAPIView(CreateAPIView):
-    serializer_class = KeyInfoSerializer
+    serializer_class = KeyInfoCreateSerializer
     queryset = KeyInfo.objects.all()
 
 # this allows user to view all information
 class KeyInfoListAPIView(ListAPIView):
-    serializer_class = KeyInfoSerializer
+    serializer_class = KeyInfoListSerializer
     queryset = KeyInfo.objects.all()
 
-# this allows user to delete information
-class KeyInfoDeteleAPIView(RetrieveUpdateAPIView):
-    serializer_class = KeyInfoSerializer
+# this allows user to update information
+class KeyInfoUpdateAPIView(RetrieveUpdateAPIView):
+    serializer_class = KeyInfoUpdateSerializer
+    queryset = KeyInfo.objects.all()
+
+# this allows user to Refresh time by 24 hours
+class KeyInfoRefreshAPIView(RetrieveUpdateAPIView):
+    serializer_class = KeyInfoRefreshSerializer
     queryset = KeyInfo.objects.all()
