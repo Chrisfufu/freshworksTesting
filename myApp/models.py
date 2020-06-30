@@ -11,9 +11,9 @@ import uuid
 # ManyToManyField through DuckFood.
 class KeyInfo(models.Model):
     keyId = models.AutoField(primary_key=True)
-    name = models.TextField(editable=False)
+    name = models.TextField()
     description = models.TextField()
-    key = models.CharField(unique=True, editable=False)
+    key = models.TextField(unique=True, editable=False)
     expiryTime = models.DateTimeField()
     class Meta:
         verbose_name = "KeyInfo"

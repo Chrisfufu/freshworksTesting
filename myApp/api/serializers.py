@@ -34,7 +34,7 @@ class KeyInfoSerializer(ModelSerializer):
                     name = name,
                     description = description,
                     expiryTime = expiryTime,
-                    repeatDays = repeatDay
+                    key = key
                 )
             return info
     

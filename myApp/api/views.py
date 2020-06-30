@@ -21,6 +21,6 @@ class KeyInfoListAPIView(ListAPIView):
     queryset = KeyInfo.objects.all()
 
 # this allows user to delete information
-class KeyInfoDeteleAPIView(RetrieveDestroyAPIView):
+class KeyInfoDeteleAPIView(RetrieveUpdateAPIView):
     serializer_class = KeyInfoSerializer
     queryset = KeyInfo.objects.all()
