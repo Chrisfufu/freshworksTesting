@@ -88,29 +88,22 @@ class AddInfo extends React.Component {
         <Form {...layout} ref={this.formRef} onFinish={this.handleSubmit} >
 
           {/* form item, this is the food name */}
-          <Form.Item className="formSection">
-            
-            <Form.Item name="name" rules={[{ required: true }]}>
-              <Input 
-                prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
-                placeholder="Name"
-              />
-            </Form.Item>
+          <Form.Item className="formSection" name="name" rules={[{ required: true }]}>
+            <Input 
+              prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
+              placeholder="Name"
+            />
           </Form.Item>
 
-          <Form.Item className="formSection">
-            <Form.Item name="description" rules={[{ required: true }]}>
-              <Input 
-                prefix={<FileTextOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
-                placeholder="description"
-              />
-            </Form.Item>
+          <Form.Item className="formSection" name="description" rules={[{ required: true }]}>
+            <Input 
+              prefix={<FileTextOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
+              placeholder="description"
+            />
           </Form.Item>
 
-          <Form.Item className="formSection">
-            <Form.Item name="expiryTime" rules={[{ required: true }]}>
-              <DatePicker  />
-            </Form.Item>
+          <Form.Item name="expiryTime" className="formSection" rules={[{ required: true }]}>
+            <DatePicker  />
           </Form.Item>
 
           {/*
