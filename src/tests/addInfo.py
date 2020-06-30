@@ -7,39 +7,30 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webDriverFunction import *
 
-def signInTesting():
-    driver = webdriver.Chrome("./chromedriver")
-    driver.get("http://localhost:3000/info")
+def addInfoTesting():
+    driver = webdriver.Chrome("./chromedriver.exe")
+    # my server
+    driver.get("http://localhost:3000/")
 
-    addInfo = waitWebDriver(driver, "//li[@class='ant-menu-item'][1]/span")
-    addInfo.click()
-
-    waitWebDriverByClass_name(driver,"ant-calendar-range-picker-input").click()
+    addFood = waitWebDriver(driver, "//li[@class='ant-menu-item'][2]/span")
+    addFood.click()
     time.sleep(1)
-    startTime = driver.find_elements(By.XPATH, "//td[@title='May 2, 2020']/div[text()='2']")
-    startTime[0].click()
-    endTime = driver.find_elements(By.XPATH, "//td[@title='May 4, 2020']/div[text()='4']")
-    endTime[0].click()
-    ok = driver.find_elements(By.XPATH, "//a[@class='ant-calendar-ok-btn']")
-    ok[0].click()
-    location = driver.find_element_by_id("infoform_location")
-    location.send_keys("Edmonton")
+    foodName = driver.find_element_by_id("name")
+    foodName.send_keys("Key")
 
-    numberOfDucks = driver.find_element_by_id("infoform_numberOfDucks")
-    numberOfDucks.send_keys("100")
-    driver.find_elements(By.XPATH, "//div[@class='ant-select-selection__placeholder']")[0].click()
+    foodType = driver.find_element_by_id("description")
+    foodType.send_keys("key description")
 
-    select1 = driver.find_elements(By.XPATH, "//i[@class='anticon anticon-check ant-select-selected-icon']")
-    select1[0].click()
-    location.click()
-
+    foodCalories = driver.find_element_by_id("expiryTime")
+    foodCalories.send_keys("2020-06-20")
+    driver.find_element_by_id("description").click()
+    time.sleep(1)
     submit = driver.find_elements(By.XPATH, "//button[@class='ant-btn ant-btn-primary']")
     submit[0].click()
-    time.sleep(1)
     ok = waitWebDriver(driver, "//button[@class='ant-btn']")
+    time.sleep(1)
     ok.click()
-    time.sleep(2)
-
+    time.sleep(1)
     driver.close()
 
-signInTesting()
+addInfoTesting()
