@@ -50,7 +50,7 @@ class AppNavigationBar extends React.Component {
         </Menu.Item>
         <Menu.Item key="refreshInfo">
           <ReloadOutlined />
-            Add Keys
+            Refresh Keys
         </Menu.Item>
       </Menu>
     );
