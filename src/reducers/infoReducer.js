@@ -10,7 +10,11 @@ export default function reducer(state={
     refreshing: false,
     refreshed: false,
     refreshError: null,
-    refresh: null
+    refresh: null,
+    update:null,
+    updating: false,
+    updated: false,
+    updateError: null
   }, action) {
 
     switch (action.type) {
@@ -67,6 +71,22 @@ export default function reducer(state={
           refreshing: false,
           refreshed: false,
           refreshError: action.payload,
+        }
+      }
+      case "UPDATE_DESCRIPTION": {
+        return {...state, updating: true}
+      }
+      // fetch method success
+      case "UPDATE_DESCRIPTION_FULFILLED": {
+        return {...state, updating: false, updated: true, update: action.payload, updateError: null}
+      }
+      // there is an error when fetching all foods
+      case "UPDATE_DESCRIPTION_REJECTED": {
+        return {
+          ...state,
+          updating: false,
+          updated: false,
+          updateError: action.payload,
         }
       }
       default:{

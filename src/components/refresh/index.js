@@ -2,12 +2,12 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
 import connect from 'redux-connect-decorator'
-import { Form, Modal, Input, Button, DatePicker } from 'antd';
+import { Form, Modal, Input, Button } from 'antd';
 import AppLayout from '../../layout';
-import { addInfo, refreshKeys } from '../../actions/infoActions';
+import { editDescription, refreshKeys } from '../../actions/infoActions';
 import {
   UserOutlined,
-  FileTextOutlined
+  FileTextOutlined,
 } from '@ant-design/icons';
 
 const layout = {
@@ -24,7 +24,9 @@ const layout = {
     error: store.info.error,
     info: store.info.info,
     refresh: store.info.refresh,
-    refreshError: store.info.refreshError
+    refreshError: store.info.refreshError,
+    updateError: store.info.updateError,
+    update: store.info.update,
   };
 })
 
@@ -76,31 +78,44 @@ class RefreshKey extends React.Component {
   // pass three parameters to the addFood method,
   // it only pass all the values to the method
   handleSubmit = values  => {
-    console.log(values.key);
+    console.log(values);
     this.props.dispatch(refreshKeys(values.key))
   };
 
   // react lifecycle, when finished uploading the information,
   // then showModal
   UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log('hhere\n\n\n');
     if(this.props.refresh !== nextProps.refresh &&
       nextProps.refresh !== undefined)
     {
-      console.log('refresh\n\n\n');
       this.showModal()
     }
     if (this.props.refreshError !== nextProps.refreshError  &&
       nextProps.refreshError !== null
-      ){
-        console.log('failure\n\n\n');
-        this.showFailureModal()
-      }
+      )
+    {
+      this.showFailureModal()
+    }
+    if (this.props.updateError !== nextProps.updateError  &&
+      nextProps.updateError !== null
+      )
+    {
+      this.showFailureModal()
+    }
+    if(this.props.update !== nextProps.update &&
+      nextProps.update !== undefined)
+    {
+      this.showModal()
+    }
   }
 
   // this method is used for reset the form.
   onReset = () => {
     this.formRef.current.resetFields();
+  };
+  updateDescription = () => {
+    this.props.dispatch(editDescription(this.formRef.current.getFieldsValue(['key','description'])))
+    // this.formRef.current.resetFields();
   };
 
   render() {
@@ -111,14 +126,21 @@ class RefreshKey extends React.Component {
         <Form {...layout} ref={this.formRef} onFinish={this.handleSubmit} >
 
           {/* form item, this is the food name */}
-          <Form.Item className="formSection">
-            
-            <Form.Item name="key" rules={[{ required: true }]}>
-              <Input 
-                prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
-                placeholder="Key"
-              />
-            </Form.Item>
+          <Form.Item className="formSection" name="key" rules={[{ required: true }]}>
+            <Input 
+              prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
+              placeholder="Key"
+            />
+          </Form.Item>
+
+          <Form.Item 
+            name="description" className="formSection"
+            help="This is fulfilled only if editing Description"
+          >
+            <Input 
+              prefix={<FileTextOutlined style={{ color: 'rgba(0,0,0,.25)' }}/>}
+              placeholder="Description"
+            />
           </Form.Item>
 
           {/*
@@ -139,7 +161,11 @@ class RefreshKey extends React.Component {
               }}
               >
               <Button type="primary" htmlType="submit" >
-                Submit
+                Extend 24 Hours
+              </Button>
+
+              <Button htmlType="button" onClick={this.updateDescription}>
+                Update Description
               </Button>
 
               <Button type="primary" htmlType="button" onClick={this.onReset}>
@@ -162,7 +188,7 @@ class RefreshKey extends React.Component {
             </Button>
           ]}
         >
-          <p>You have successfully extended the key 24 hours</p>
+          <p>You have successfully extended the key 24 hours/ updated description</p>
         </Modal>
         <Modal
           title="Failure"

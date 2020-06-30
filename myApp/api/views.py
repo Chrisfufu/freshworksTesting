@@ -25,6 +25,7 @@ class KeyInfoListAPIView(ListAPIView):
 class KeyInfoUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = KeyInfoUpdateSerializer
     queryset = KeyInfo.objects.all()
+    lookup_field = 'key'
 
 # this allows user to Refresh time by 24 hours
 class KeyInfoRefreshAPIView(RetrieveUpdateAPIView):

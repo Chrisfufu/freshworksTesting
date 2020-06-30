@@ -58,3 +58,22 @@ export function refreshKeys(data) {
     })
   }
 }
+
+
+export function editDescription(data) {
+  // put method,
+  // fetch all food objects
+  return function(dispatch) {
+    dispatch({type: "UPDATE_DESCRIPTION"});
+    axios(URL_PREFIX + "/api/info/update/" + data.key +"/", {
+      method: "put",
+      data: data
+    })
+    .then((response) => {
+      dispatch({type: "UPDATE_DESCRIPTION_FULFILLED", payload: response.data})
+    })
+    .catch((err) => {
+      dispatch({type: "UPDATE_DESCRIPTION_REJECTED", payload: err})
+    })
+  }
+}
