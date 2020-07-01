@@ -15,7 +15,7 @@ def refreshTesting():
     refresh.click()
 
     key = driver.find_element_by_id("key")
-    key.send_keys("3a218a04a3b44442be7534f7c968f88c")
+    key.send_keys("80959ae6ddb54435a2b5d344ca386648")
 
     submit = driver.find_elements(By.XPATH, "//button[@class='ant-btn ant-btn-primary']")
     submit[0].click()
@@ -34,7 +34,7 @@ def updateDescriptionTesting():
     refresh.click()
 
     key = driver.find_element_by_id("key")
-    key.send_keys("3a218a04a3b44442be7534f7c968f88c")
+    key.send_keys("80959ae6ddb54435a2b5d344ca386648")
 
     description = driver.find_element_by_id("description")
     description.send_keys("asdfzxcvzxcvafbadfb  asdfzbv")
